@@ -105,6 +105,7 @@ namespace Puzzle15
             Button tileEmpty = (Button)this.Controls["TileEmpty"];
 
             double a = 0, b = 0, c = 0;
+
             a = tileEmpty.Left - tile.Left;
             b = tileEmpty.Top - tile.Top;
             c = Math.Sqrt(Math.Pow(a, 2) + Math.Pow(b, 2));
@@ -153,9 +154,9 @@ namespace Puzzle15
         private void ChangeBackColorForForm1()
         {
             int R, G, B;
-            R = rand.Next(0, 200);
-            G = rand.Next(0, 200);
-            B = rand.Next(0, 200);
+            R = rand.Next(0, 190);
+            G = rand.Next(0, 190);
+            B = rand.Next(0, 190);
             BackColor = Color.FromArgb(R, G, B);
         }
 
