@@ -17,6 +17,8 @@ namespace Puzzle15
         List<Button> tiles = new List<Button>();
         List<Point> initialLocations = new List<Point>();
         Random rand = new Random();
+        Label lbl = new Label();
+        private int clickCounter = 0;
 
         public Puzzle()
         {
@@ -24,6 +26,7 @@ namespace Puzzle15
             InitializeComponent();
             InitializPuzzle();
             ShuffleTiles();
+            LableAdder();
         }
 
         private void InitializPuzzle()
@@ -31,7 +34,7 @@ namespace Puzzle15
             int tileCounter = 1;
             Button tile = null;
 
-            this.Width = 420;
+            this.Width = 500;
             this.Height = 440;
 
             for (int j = 0; j < 4; j++)
@@ -65,9 +68,30 @@ namespace Puzzle15
 
                     tile.Click += Tile_Click;
 
-                    tileCounter++;
+                    tileCounter++;                    
                 }
-            }
+            }        
+        }
+
+        private void LableAdder()
+        {            
+            lbl.Text = "0";
+            lbl.BackColor = Color.White;
+            lbl.ForeColor = Color.Black;
+            lbl.BorderStyle = BorderStyle.FixedSingle;
+            lbl.TextAlign = ContentAlignment.TopCenter;
+            lbl.FlatStyle = FlatStyle.System;
+            lbl.Font = new Font("Consolas", 20);                       
+            lbl.Width = 80;
+            lbl.Height = 80;
+            lbl.Location = new Point(385, 20);
+            this.Controls.Add(lbl);
+        }
+
+        private void ClickCounter()
+        {            
+            clickCounter++;
+            lbl.Text = clickCounter.ToString();      
         }
 
         private void Tile_Click(object sender, EventArgs e)
@@ -80,6 +104,7 @@ namespace Puzzle15
                 CheckForWin();
                 PlaySimpleSound();
                 ChangeBackColorForForm1();
+                ClickCounter();
             }
         }
 
