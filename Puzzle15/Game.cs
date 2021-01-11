@@ -97,17 +97,19 @@ namespace Puzzle15
             tileEmpty.Location = tileOldLocatione;
         }
 
-        //Tile mixer
-
-        private void ShuffleTiles()
+        private void Tile_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < 100; i++)
+            Button tile = (Button)sender;
+
+            if (CanSwap(tile))
             {
-                SwapTiles(tiles[rand.Next(0, 15)]);
+                SwapTiles(tile);
+                CheckForWin();
+                PlaySimpleSound();
+                ChangeBackColorForGame();
+                ClickCounter();
             }
         }
-
-        //Ability to swap with emptytile
 
         private bool CanSwap(Button tile)
         {
@@ -129,6 +131,16 @@ namespace Puzzle15
             }
         }
 
+        //Tile mixer
+
+        private void ShuffleTiles()
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                SwapTiles(tiles[rand.Next(0, 15)]);
+            }
+        }
+        
         //Win checker
 
         private void CheckForWin()
@@ -147,7 +159,7 @@ namespace Puzzle15
             }
         }
 
-        //Texts for star onf end
+        //Texts for Star and End
 
         private void GameOver()
         {            
@@ -242,21 +254,7 @@ namespace Puzzle15
         {
             clickCounter++;
             lbl1.Text = clickCounter.ToString();
-        }
-
-        private void Tile_Click(object sender, EventArgs e)
-        {
-            Button tile = (Button)sender;
-
-            if (CanSwap(tile))
-            {
-                SwapTiles(tile);
-                CheckForWin();
-                PlaySimpleSound();
-                ChangeBackColorForGame();
-                ClickCounter();
-            }
-        }
+        }        
 
         //Clock
 
