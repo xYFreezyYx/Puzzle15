@@ -40,6 +40,8 @@ namespace Puzzle15
             ClockTimer.Start();
         }
 
+        //Tile adder and Game[Design] chnager
+
         private void InitializPuzzle()
         {            
             int tileCounter = 1;
@@ -83,56 +85,8 @@ namespace Puzzle15
                 }
             }        
         }
-
-        private void ClickCounterDisplayAdder()
-        {            
-            lbl1.Text = "0";
-            lbl1.BackColor = Color.White;
-            lbl1.ForeColor = Color.Black;
-            lbl1.BorderStyle = BorderStyle.FixedSingle;
-            lbl1.TextAlign = ContentAlignment.TopCenter;
-            lbl1.FlatStyle = FlatStyle.System;
-            lbl1.Font = new Font("Consolas", 30);                       
-            lbl1.Width = 80;
-            lbl1.Height = 50;
-            lbl1.Location = new Point(20, 55);
-            this.Controls.Add(lbl1);
-        }
-
-        private void ClockDisplayAdder()
-        {
-            lbl2.Text = "00:00:00:0";
-            lbl2.BackColor = Color.White;
-            lbl2.ForeColor = Color.Black;
-            lbl2.BorderStyle = BorderStyle.FixedSingle;
-            lbl2.TextAlign = ContentAlignment.TopCenter;
-            lbl2.FlatStyle = FlatStyle.System;
-            lbl2.Font = new Font("Consolas", 30);
-            lbl2.Width = 260;
-            lbl2.Height = 50;
-            lbl2.Location = new Point(110, 55);
-            this.Controls.Add(lbl2);
-        }
-
-        private void ClickCounter()
-        {            
-            clickCounter++;
-            lbl1.Text = clickCounter.ToString();      
-        }
-
-        private void Tile_Click(object sender, EventArgs e)
-        {
-            Button tile = (Button)sender;
-
-            if (CanSwap(tile))
-            {
-                SwapTiles(tile);
-                CheckForWin();
-                PlaySimpleSound();
-                ChangeBackColorForForm1();
-                ClickCounter();                
-            }
-        }
+        
+        //Ability to swap tiles
 
         private void SwapTiles(Button tile)
         {
@@ -143,6 +97,8 @@ namespace Puzzle15
             tileEmpty.Location = tileOldLocatione;
         }
 
+        //Tile mixer
+
         private void ShuffleTiles()
         {
             for (int i = 0; i < 100; i++)
@@ -150,6 +106,8 @@ namespace Puzzle15
                 SwapTiles(tiles[rand.Next(0, 15)]);
             }
         }
+
+        //Ability to swap with emptytile
 
         private bool CanSwap(Button tile)
         {
@@ -171,6 +129,8 @@ namespace Puzzle15
             }
         }
 
+        //Win checker
+
         private void CheckForWin()
         {
             bool win = true;
@@ -181,14 +141,16 @@ namespace Puzzle15
 
             if (win)
             {
+                ClockTimer.Stop();
                 GameOver();
                 PlaySimpleSound();
             }
         }
 
+        //Texts for star onf end
+
         private void GameOver()
-        {
-            ClockTimer.Stop();
+        {            
             MessageBox.Show("Congrats! You Solved Puzzle 15! Your a genius!");
         }
 
@@ -203,7 +165,9 @@ namespace Puzzle15
             return firstText + delimiter + secondText;
         }
 
-        private void ChangeBackColorForForm1()
+        //Game[Designe] BackRound changer
+
+        private void ChangeBackColorForGame()
         {
             int R, G, B;
             R = rand.Next(0, 190);
@@ -211,6 +175,8 @@ namespace Puzzle15
             B = rand.Next(0, 190);
             BackColor = Color.FromArgb(R, G, B);
         }
+
+        //Sound players
 
         private void PlaySimpleSound()
         {
@@ -221,6 +187,92 @@ namespace Puzzle15
         private void PlayHand()
         {
             SystemSounds.Hand.Play();
+        }
+
+        //Labes
+        
+        private void ClickCounterLable()
+        {
+            lbl3.Text = "Clicks";
+            lbl3.BackColor = Color.White;
+            lbl3.ForeColor = Color.Black;
+            lbl3.BorderStyle = BorderStyle.FixedSingle;
+            lbl3.TextAlign = ContentAlignment.TopCenter;
+            lbl3.FlatStyle = FlatStyle.System;
+            lbl3.Font = new Font("Consolas", 15);
+            lbl3.Width = 80;
+            lbl3.Height = 25;
+            lbl3.Location = new Point(20, 20);
+            this.Controls.Add(lbl3);
+        }
+
+        private void TimerLable()
+        {
+            lbl4.Text = "H:Min:Sec:MiliSec";
+            lbl4.BackColor = Color.White;
+            lbl4.ForeColor = Color.Black;
+            lbl4.BorderStyle = BorderStyle.FixedSingle;
+            lbl4.TextAlign = ContentAlignment.TopCenter;
+            lbl4.FlatStyle = FlatStyle.System;
+            lbl4.Font = new Font("Consolas", 15);
+            lbl4.Width = 260;
+            lbl4.Height = 25;
+            lbl4.Location = new Point(110, 20);
+            this.Controls.Add(lbl4);
+        }
+
+        //Click counter
+
+        private void ClickCounterDisplayAdder()
+        {
+            lbl1.Text = "0";
+            lbl1.BackColor = Color.White;
+            lbl1.ForeColor = Color.Black;
+            lbl1.BorderStyle = BorderStyle.FixedSingle;
+            lbl1.TextAlign = ContentAlignment.TopCenter;
+            lbl1.FlatStyle = FlatStyle.System;
+            lbl1.Font = new Font("Consolas", 30);
+            lbl1.Width = 80;
+            lbl1.Height = 50;
+            lbl1.Location = new Point(20, 55);
+            this.Controls.Add(lbl1);
+        }
+
+        private void ClickCounter()
+        {
+            clickCounter++;
+            lbl1.Text = clickCounter.ToString();
+        }
+
+        private void Tile_Click(object sender, EventArgs e)
+        {
+            Button tile = (Button)sender;
+
+            if (CanSwap(tile))
+            {
+                SwapTiles(tile);
+                CheckForWin();
+                PlaySimpleSound();
+                ChangeBackColorForGame();
+                ClickCounter();
+            }
+        }
+
+        //Clock
+
+        private void ClockDisplayAdder()
+        {
+            lbl2.Text = "00:00:00:0";
+            lbl2.BackColor = Color.White;
+            lbl2.ForeColor = Color.Black;
+            lbl2.BorderStyle = BorderStyle.FixedSingle;
+            lbl2.TextAlign = ContentAlignment.TopCenter;
+            lbl2.FlatStyle = FlatStyle.System;
+            lbl2.Font = new Font("Consolas", 30);
+            lbl2.Width = 260;
+            lbl2.Height = 50;
+            lbl2.Location = new Point(110, 55);
+            this.Controls.Add(lbl2);
         }
 
         private void ClockTimer_Tick(object sender, EventArgs e)
@@ -256,36 +308,6 @@ namespace Puzzle15
             timeText += sec.ToString("00") + ":";
             timeText += dsec.ToString();
             lbl2.Text = timeText;
-        }
-
-        private void ClickCounterLable()
-        {
-            lbl3.Text = "Clicks";
-            lbl3.BackColor = Color.White;
-            lbl3.ForeColor = Color.Black;
-            lbl3.BorderStyle = BorderStyle.FixedSingle;
-            lbl3.TextAlign = ContentAlignment.TopCenter;
-            lbl3.FlatStyle = FlatStyle.System;
-            lbl3.Font = new Font("Consolas", 15);
-            lbl3.Width = 80;
-            lbl3.Height = 25;
-            lbl3.Location = new Point(20, 20);
-            this.Controls.Add(lbl3);
-        }
-
-        private void TimerLable()
-        {
-            lbl4.Text = "H:Min:Sec:MiliSec";
-            lbl4.BackColor = Color.White;
-            lbl4.ForeColor = Color.Black;
-            lbl4.BorderStyle = BorderStyle.FixedSingle;
-            lbl4.TextAlign = ContentAlignment.TopCenter;
-            lbl4.FlatStyle = FlatStyle.System;
-            lbl4.Font = new Font("Consolas", 15);
-            lbl4.Width = 260;
-            lbl4.Height = 25;
-            lbl4.Location = new Point(110, 20);
-            this.Controls.Add(lbl4);
         }
     }
 }
