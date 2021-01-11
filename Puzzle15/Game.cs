@@ -17,10 +17,13 @@ namespace Puzzle15
         List<Button> tiles = new List<Button>();
         List<Point> initialLocations = new List<Point>();
         Random rand = new Random();
+        Button resetButton = new Button();
         Label lbl1 = new Label();
         Label lbl2 = new Label();
         Label lbl3 = new Label();
         Label lbl4 = new Label();
+        Label lbl5 = new Label();
+        Label lbl6 = new Label();
         private int clickCounter = 0;
         int dsec = 0;
         int sec = 0;
@@ -29,13 +32,16 @@ namespace Puzzle15
 
         public Puzzle()
         {
-            StartText();            
+            StartText();
             InitializeComponent();
             InitializPuzzle();
             ShuffleTiles();
-            ClickCounterDisplayAdder();
+            ClickDisplayAdder();
             ClockDisplayAdder();
             ClickCounterLable();
+            ResetButtonAdder();
+            WinCounterLable();
+            WinCounterDisply();
             TimerLable();
             ClockTimer.Start();
         }
@@ -43,18 +49,18 @@ namespace Puzzle15
         //Tile adder and Game[Design] chnager
 
         private void InitializPuzzle()
-        {            
+        {
             int tileCounter = 1;
             Button tile = null;
 
-            this.Width = 410;
+            this.Width = 500;
             this.Height = 525;
 
             for (int j = 0; j < 4; j++)
             {
                 for (int i = 0; i < 4; i++)
                 {
-                    tile = new Button();                   
+                    tile = new Button();
                     tile.BackColor = Color.SteelBlue;
                     tile.ForeColor = Color.White;
                     tile.FlatStyle = FlatStyle.System;
@@ -62,7 +68,7 @@ namespace Puzzle15
                     tile.Width = 80;
                     tile.Height = 80;
                     tile.Top = 115 + j * 90;
-                    tile.Left = 20 + i * 90;
+                    tile.Left = 60 + i * 90;
                     tile.Text = tileCounter.ToString();
 
                     if (tileCounter == 16)
@@ -81,11 +87,11 @@ namespace Puzzle15
 
                     tile.Click += Tile_Click;
 
-                    tileCounter++;                    
+                    tileCounter++;
                 }
-            }        
+            }            
         }
-        
+
         //Ability to swap tiles
 
         private void SwapTiles(Button tile)
@@ -107,7 +113,7 @@ namespace Puzzle15
                 CheckForWin();
                 PlaySimpleSound();
                 ChangeBackColorForGame();
-                ClickCounter();
+                ClickCounter();                
             }
         }
 
@@ -140,13 +146,13 @@ namespace Puzzle15
                 SwapTiles(tiles[rand.Next(0, 15)]);
             }
         }
-        
+
         //Win checker
 
         private void CheckForWin()
         {
             bool win = true;
-            for(int i = 0; i < 16; i++)
+            for (int i = 0; i < 16; i++)
             {
                 win = win & tiles[i].Location == initialLocations[i];
             }
@@ -155,20 +161,24 @@ namespace Puzzle15
             {
                 ClockTimer.Stop();
                 GameOver();
-                PlaySimpleSound();
+                PlayExclamation();
+                resetButton.Visible = true;
+                this.Height = 620;
+                WinCounter();
             }
         }
 
         //Texts for Star and End
 
         private void GameOver()
-        {            
+        {
             MessageBox.Show("Congrats! You Solved Puzzle 15! Your a genius!");
+            
         }
 
         private void StartText()
         {
-            MessageBox.Show(GlueText("To Start Press", "'OK'", " "));
+            MessageBox.Show(GlueText("To Start Press", "'OK'", " "));           
             PlayHand();
         }
 
@@ -190,19 +200,24 @@ namespace Puzzle15
 
         //Sound players
 
-        private void PlaySimpleSound()
+        private void PlaySimpleSound() //Click sound
         {
             SoundPlayer simpleSound = new SoundPlayer(@"c:\Windows\Media\chimes.wav");
             simpleSound.Play();
         }
 
-        private void PlayHand()
+        private void PlayHand() //Start sound
         {
             SystemSounds.Hand.Play();
         }
 
+        private void PlayExclamation() //Win sound
+        {
+            SystemSounds.Exclamation.Play();
+        }
+
         //Labes
-        
+
         private void ClickCounterLable()
         {
             lbl3.Text = "Clicks";
@@ -233,9 +248,24 @@ namespace Puzzle15
             this.Controls.Add(lbl4);
         }
 
+        private void WinCounterLable()
+        {
+            lbl5.Text = "Wins";
+            lbl5.BackColor = Color.White;
+            lbl5.ForeColor = Color.Black;
+            lbl5.BorderStyle = BorderStyle.FixedSingle;
+            lbl5.TextAlign = ContentAlignment.TopCenter;
+            lbl5.FlatStyle = FlatStyle.System;
+            lbl5.Font = new Font("Consolas", 15);
+            lbl5.Width = 80;
+            lbl5.Height = 25;
+            lbl5.Location = new Point(380, 20);
+            this.Controls.Add(lbl5);
+        }
+
         //Click counter
 
-        private void ClickCounterDisplayAdder()
+        private void ClickDisplayAdder()
         {
             lbl1.Text = "0";
             lbl1.BackColor = Color.White;
@@ -254,12 +284,36 @@ namespace Puzzle15
         {
             clickCounter++;
             lbl1.Text = clickCounter.ToString();
-        }        
+        }
+
+        //Win counter
+
+        private void WinCounterDisply()
+        {
+            lbl6.Text = "0";
+            lbl6.BackColor = Color.White;
+            lbl6.ForeColor = Color.Black;
+            lbl6.BorderStyle = BorderStyle.FixedSingle;
+            lbl6.TextAlign = ContentAlignment.TopCenter;
+            lbl6.FlatStyle = FlatStyle.System;
+            lbl6.Font = new Font("Consolas", 30);
+            lbl6.Width = 80;
+            lbl6.Height = 50;
+            lbl6.Location = new Point(380, 55);
+            this.Controls.Add(lbl6);
+        }
+
+        private void WinCounter()
+        {
+            int winCounter = 0;
+            winCounter++;
+            lbl6.Text = winCounter.ToString();
+        }
 
         //Clock
 
         private void ClockDisplayAdder()
-        {
+        {            
             lbl2.Text = "00:00:00:0";
             lbl2.BackColor = Color.White;
             lbl2.ForeColor = Color.Black;
@@ -306,6 +360,45 @@ namespace Puzzle15
             timeText += sec.ToString("00") + ":";
             timeText += dsec.ToString();
             lbl2.Text = timeText;
+        }
+
+        //Full reset button
+
+        private void ResetButtonAdder()
+        {
+            resetButton.Text = "Reset";
+            resetButton.BackColor = Color.White;
+            resetButton.ForeColor = Color.Black;
+            resetButton.FlatStyle = FlatStyle.System;
+            resetButton.Font = new Font("Consolas", 30);
+            resetButton.Width = 440;
+            resetButton.Height = 80;
+            resetButton.Location = new Point(20, 475);
+            this.Controls.Add(resetButton);
+            resetButton.Visible = false;
+
+            resetButton.Click += ResetButton_Click;
+        }
+
+        private void ResetButton_Click(object sender, EventArgs e)
+        {
+            int Rr, Gg, Bb;
+
+            ClockTimer.Stop();
+            dsec = 0;
+            sec = 0;
+            min = 0;
+            hou = 0;
+            UpdateClockDisplay();
+            lbl2.Text = "00:00:00:0";
+            lbl1.Text = "0";
+            Rr = rand.Next(255, 255);
+            Gg = rand.Next(255, 255);
+            Bb = rand.Next(255, 255);
+            BackColor = Color.FromArgb(Rr, Gg, Bb);
+            clickCounter = 0;
+            StartText();
+            ClockTimer.Start();
         }
     }
 }
