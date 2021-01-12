@@ -397,6 +397,7 @@ namespace Puzzle15
             Bb = rand.Next(255, 255);
             BackColor = Color.FromArgb(Rr, Gg, Bb);
             clickCounter = 0;
+            ShuffleTiles();
             StartText();
             ClockTimer.Start();
         }
