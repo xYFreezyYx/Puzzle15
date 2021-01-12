@@ -382,7 +382,7 @@ namespace Puzzle15
 
         private void ResetButton_Click(object sender, EventArgs e)
         {
-            int Rr, Gg, Bb;
+            int R, G, B;
 
             ClockTimer.Stop();
             dsec = 0;
@@ -392,13 +392,13 @@ namespace Puzzle15
             UpdateClockDisplay();
             lbl2.Text = "00:00:00:0";
             lbl1.Text = "0";
-            Rr = rand.Next(255, 255);
-            Gg = rand.Next(255, 255);
-            Bb = rand.Next(255, 255);
-            BackColor = Color.FromArgb(Rr, Gg, Bb);
+            R = rand.Next(255, 255);
+            G = rand.Next(255, 255);
+            B = rand.Next(255, 255);
+            BackColor = Color.FromArgb(R, G, B);
             clickCounter = 0;
-            ShuffleTiles();
             StartText();
+            ShuffleTiles();
             ClockTimer.Start();
         }
     }
