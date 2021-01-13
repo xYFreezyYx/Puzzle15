@@ -23,6 +23,7 @@ namespace Puzzle15
         Label lbl1 = new Label();
         Label lbl2 = new Label();
         Label lbl3 = new Label();
+        bool IsActive = true;
         int clickCounter = 0;
         int dsec = 0;
         int sec = 0;
@@ -37,13 +38,14 @@ namespace Puzzle15
             MisaleniusStuff();
             ClockStuff();
             ClickStuff();
-            WinStuff();            
+            WinStuff();
+            Colorstuff();
             ClockTimer.Start();
         }
 
         //Organizatione Boxes
 
-        private void Colorstuff() //Not enabled cause havent finished
+        private void Colorstuff()
         {
             ColorSwitchOff();
             ColorSwitchOn();
@@ -141,8 +143,12 @@ namespace Puzzle15
                 CheckForWin();
                 PlaySimpleSound();
                 ClickCounter();
-                ChangeBackColorForGame();
-            }
+
+                if (IsActive == true)
+                {
+                    ChangeBackColorForGame();
+                }
+            }            
         }
 
         private bool CanSwap(Button tile)
@@ -200,8 +206,7 @@ namespace Puzzle15
 
         private void GameOver()
         {
-            MessageBox.Show("Congrats! You Solved Puzzle 15! Your a genius!");
-            
+            MessageBox.Show("Congrats! You Solved Puzzle 15! Your a genius!");            
         }
 
         private void StartText()
@@ -426,8 +431,8 @@ namespace Puzzle15
         }
 
         //Color switch on/off
-        //Not enabled cause havent finished it
-        private void ColorSwitchOff() //Not finnished
+
+        private void ColorSwitchOff()
         {
             colorShuffleOff.Text = "Off";
             colorShuffleOff.BackColor = Color.White;
@@ -442,7 +447,7 @@ namespace Puzzle15
             colorShuffleOff.Click += ColorShuffleOff_Click;
         }
 
-        private void ColorSwitchOn() //Not finished
+        private void ColorSwitchOn()
         {
             colorShuffleOn.Text = "On";
             colorShuffleOn.BackColor = Color.White;
@@ -457,18 +462,18 @@ namespace Puzzle15
             colorShuffleOn.Click += ColorShuffleOn_Click;
         }
 
-        private void ColorShuffleOff_Click(object sender, EventArgs e) //Not finished
+        private void ColorShuffleOff_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.GhostWhite;
-            
+            IsActive = false;
         }
 
-        private void ColorShuffleOn_Click(object sender, EventArgs e) //Not finished
+        private void ColorShuffleOn_Click(object sender, EventArgs e)
         {
-            ChangeBackColorForGame();
+            IsActive = true;
         }
 
-        private void ChangeBackColorForGame() //Finished
+        private void ChangeBackColorForGame()
         {
             int R, G, B;
             R = rand.Next(0, 190);
