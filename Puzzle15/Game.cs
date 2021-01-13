@@ -25,6 +25,7 @@ namespace Puzzle15
         Label lbl3 = new Label();
         bool IsActive = true;
         int clickCounter = 0;
+        int winCounter = 0;
         int dsec = 0;
         int sec = 0;
         int min = 0;
@@ -335,8 +336,7 @@ namespace Puzzle15
         }
 
         private void WinCounter()
-        {
-            int winCounter = 0;
+        {            
             winCounter++;
             lbl2.Text = winCounter.ToString();
         }
@@ -414,7 +414,7 @@ namespace Puzzle15
         private void ResetButton_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.GhostWhite;
-            this.Width = 500;
+            this.Height = 525;
             resetButton.Visible = false;
             ClockTimer.Stop();
             dsec = 0;
