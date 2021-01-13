@@ -478,9 +478,9 @@ namespace Puzzle15
         private void ChangeBackColorForGame()
         {
             int R, G, B;
-            R = rand.Next(0, 190);
-            G = rand.Next(0, 190);
-            B = rand.Next(0, 190);
+            R = rand.Next(0, 180);
+            G = rand.Next(0, 180);
+            B = rand.Next(0, 180);
             BackColor = Color.FromArgb(R, G, B);
         }
     }
