@@ -464,12 +464,14 @@ namespace Puzzle15
 
         private void ColorShuffleOff_Click(object sender, EventArgs e)
         {
+            PlayHand();
             this.BackColor = Color.GhostWhite;
             IsActive = false;
         }
 
         private void ColorShuffleOn_Click(object sender, EventArgs e)
         {
+            PlayHand();
             IsActive = true;
         }
 
