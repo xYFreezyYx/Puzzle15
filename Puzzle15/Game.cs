@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Man rekords Puzzle15 salikšanā: 1 Min 9 Sec jeb 00:01:09 H  H:Min:Sec 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
