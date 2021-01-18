@@ -18,14 +18,14 @@ namespace Puzzle15
         List<Point> initialLocations = new List<Point>();
         List<Button> tiles = new List<Button>();                       
         PictureBox colorShuffleOnOff = new PictureBox();
-        PictureBox colorShuffleOn = new PictureBox();
-        Button resetButton = new Button();
+        PictureBox resetButton = new PictureBox();
         PictureBox startpauseButton = new PictureBox();
         Random rand = new Random();
         Label lbl1 = new Label();
         Label lbl2 = new Label();
         Label lbl3 = new Label();
         bool IsActive = true;
+        bool IsActive1 = true;
         int clickCounter = 0;
         int winCounter = 0;
         int dsec = 0;
@@ -82,7 +82,7 @@ namespace Puzzle15
 
             this.BackColor = Color.GhostWhite;
             this.Width = 500;
-            this.Height = 525;
+            this.Height = 560;
 
             for (int j = 0; j < 4; j++)
             {
@@ -95,7 +95,7 @@ namespace Puzzle15
                     tile.Font = new Font("Consolas", 20);
                     tile.Width = 80;
                     tile.Height = 80;
-                    tile.Top = 115 + j * 90;
+                    tile.Top = 155 + j * 90;
                     tile.Left = 65 + i * 90;
                     tile.Text = tileCounter.ToString();
 
@@ -134,19 +134,21 @@ namespace Puzzle15
         private void Tile_Click(object sender, EventArgs e)
         {
             Button tile = (Button)sender;
-
-            if (CanSwap(tile))
+            if (IsActive1 == true)
             {
-                SwapTiles(tile);
-                CheckForWin();
-                PlaySimpleSound();
-                ClickCounter();
-
-                if (IsActive == true)
+                if (CanSwap(tile))
                 {
-                    ChangeBackColorForGame();
+                    SwapTiles(tile);
+                    CheckForWin();
+                    PlaySimpleSound();
+                    ClickCounter();
+
+                    if (IsActive == true)
+                    {
+                        ChangeBackColorForGame();
+                    }
                 }
-            }            
+            }                       
         }
 
         private bool CanSwap(Button tile)
@@ -175,7 +177,7 @@ namespace Puzzle15
         {
             for (int i = 0; i < 100; i++)
             {
-                SwapTiles(tiles[rand.Next(0, 15)]);
+                SwapTiles(tiles[rand.Next(0, 15)]);                
             }
         }
 
@@ -195,7 +197,7 @@ namespace Puzzle15
                 GameOver();
                 PlayExclamation();
                 resetButton.Visible = true;
-                this.Height = 620;
+                this.Height = 630;
                 WinCounter();
             }
         }
@@ -240,56 +242,53 @@ namespace Puzzle15
 
         private void ClickCounterLable()
         {
-            Label lblC = null;
+            PictureBox lblC = null;
 
-            lblC = new Label();
-            lblC.Text = "Clicks";
-            lblC.BackColor = Color.GhostWhite;
-            lblC.ForeColor = Color.Black;
-            lblC.BorderStyle = BorderStyle.FixedSingle;
-            lblC.TextAlign = ContentAlignment.TopCenter;
-            lblC.FlatStyle = FlatStyle.System;
-            lblC.Font = new Font("Consolas", 15);
+            lblC = new PictureBox();
             lblC.Width = 80;
-            lblC.Height = 25;
+            lblC.Height = 80;
             lblC.Location = new Point(20, 20);
             this.Controls.Add(lblC);
+
+            lblC.BackColor = Color.Transparent;
+            lblC.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            string pictureName = "Clicks";
+            lblC.Image = (Image)Resources.ResourceManager.GetObject(pictureName);
         }
 
         private void TimerLable()
         {
-            Label lblT = null;
+            PictureBox lblT = null;
 
-            lblT = new Label();
-            lblT.Text = "H:Min:Sec:MiliSec";
-            lblT.BackColor = Color.GhostWhite;
-            lblT.ForeColor = Color.Black;
-            lblT.BorderStyle = BorderStyle.FixedSingle;
-            lblT.TextAlign = ContentAlignment.TopCenter;
-            lblT.FlatStyle = FlatStyle.System;
-            lblT.Font = new Font("Consolas", 15);
+            lblT = new PictureBox();
             lblT.Width = 260;
-            lblT.Height = 25;
-            lblT.Location = new Point(110, 20);
+            lblT.Height = 40;
+            lblT.Location = new Point(110, 40);
             this.Controls.Add(lblT);
+
+            lblT.BackColor = Color.Transparent;
+            lblT.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            string pictureName = "Time";
+            lblT.Image = (Image)Resources.ResourceManager.GetObject(pictureName);
         }
 
         private void WinCounterLable()
         {
-            Label lblW = null;
+            PictureBox lblW = null;
 
-            lblW = new Label();
-            lblW.Text = "Wins";
-            lblW.BackColor = Color.GhostWhite;
-            lblW.ForeColor = Color.Black;
-            lblW.BorderStyle = BorderStyle.FixedSingle;
-            lblW.TextAlign = ContentAlignment.TopCenter;
-            lblW.FlatStyle = FlatStyle.System;
-            lblW.Font = new Font("Consolas", 15);
+            lblW = new PictureBox();
             lblW.Width = 80;
-            lblW.Height = 25;
+            lblW.Height = 80;
             lblW.Location = new Point(380, 20);
             this.Controls.Add(lblW);
+
+            lblW.BackColor = Color.Transparent;
+            lblW.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            string pictureName = "Win";
+            lblW.Image = (Image)Resources.ResourceManager.GetObject(pictureName);
         }
 
         //Click counter
@@ -305,7 +304,7 @@ namespace Puzzle15
             lbl1.Font = new Font("Consolas", 30);
             lbl1.Width = 80;
             lbl1.Height = 50;
-            lbl1.Location = new Point(20, 55);
+            lbl1.Location = new Point(20, 100);
             this.Controls.Add(lbl1);            
         }
 
@@ -328,7 +327,7 @@ namespace Puzzle15
             lbl2.Font = new Font("Consolas", 30);
             lbl2.Width = 80;
             lbl2.Height = 50;
-            lbl2.Location = new Point(380, 55);
+            lbl2.Location = new Point(380, 100);
             this.Controls.Add(lbl2);
         }
 
@@ -351,7 +350,7 @@ namespace Puzzle15
             lbl3.Font = new Font("Consolas", 30);
             lbl3.Width = 260;
             lbl3.Height = 50;
-            lbl3.Location = new Point(110, 55);
+            lbl3.Location = new Point(110, 100);
             this.Controls.Add(lbl3);
         }
 
@@ -394,16 +393,17 @@ namespace Puzzle15
 
         private void ResetButtonAdder()
         {
-            resetButton.Text = "Reset";
-            resetButton.BackColor = Color.White;
-            resetButton.ForeColor = Color.Black;
-            resetButton.FlatStyle = FlatStyle.System;
-            resetButton.Font = new Font("Consolas", 30);
-            resetButton.Width = 440;
+            resetButton.Width = 80;
             resetButton.Height = 80;
-            resetButton.Location = new Point(20, 475);
+            resetButton.Location = new Point(200, 505);
             this.Controls.Add(resetButton);
             resetButton.Visible = false;
+
+            resetButton.BackColor = Color.Transparent;
+            resetButton.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            string pictureName = "Replay";
+            resetButton.Image = (Image)Resources.ResourceManager.GetObject(pictureName);
 
             resetButton.Click += ResetButton_Click;
         }
@@ -411,7 +411,7 @@ namespace Puzzle15
         private void ResetButton_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.GhostWhite;
-            this.Height = 525;
+            this.Height = 560;
             resetButton.Visible = false;
             ClockTimer.Stop();
             dsec = 0;
@@ -437,20 +437,21 @@ namespace Puzzle15
 
             string pictureNamePS = "Pause";
             startpauseButton.Image = (Image)Resources.ResourceManager.GetObject(pictureNamePS);
+            IsActive1 = true;
 
             StartText();
             ShuffleTiles();
             ClockTimer.Start();
         }
 
-        //Pause Button
+        //Start/Pause Button
 
         private void StartPauseButtonAdder()
         {
             startpauseButton.Tag = "pause";
             startpauseButton.Width = 40;
             startpauseButton.Height = 30;
-            startpauseButton.Location = new Point(20, 115);
+            startpauseButton.Location = new Point(20, 155);
             this.Controls.Add(startpauseButton);
             startpauseButton.BackColor = Color.Transparent;
             startpauseButton.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -465,9 +466,10 @@ namespace Puzzle15
         {
             if (startpauseButton.Tag == "pause")
             {
-                this.Height = 620;
+                this.Height = 630;
                 resetButton.Visible = true;
                 startpauseButton.Tag = "start";
+                IsActive1 = false;
                 ClockTimer.Stop();
 
                 startpauseButton.BackColor = Color.Transparent;
@@ -478,9 +480,10 @@ namespace Puzzle15
             }
             else if (startpauseButton.Tag == "start")
             {
-                this.Height = 525;
+                this.Height = 560;
                 resetButton.Visible = false;
                 startpauseButton.Tag = "pause";
+                IsActive1 = true;
                 ClockTimer.Start();
 
                 startpauseButton.BackColor = Color.Transparent;
@@ -498,7 +501,7 @@ namespace Puzzle15
             colorShuffleOnOff.Tag = "on";
             colorShuffleOnOff.Width = 60;
             colorShuffleOnOff.Height = 30;
-            colorShuffleOnOff.Location = new Point(420, 115);
+            colorShuffleOnOff.Location = new Point(420, 155);
             this.Controls.Add(colorShuffleOnOff);
 
             colorShuffleOnOff.BackColor = Color.Transparent;

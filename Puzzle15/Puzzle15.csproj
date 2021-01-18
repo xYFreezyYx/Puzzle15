@@ -85,6 +85,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icons8-Ios7-Logos-Register-Editor.ico" />
+    <None Include="Resources\Ghost.png" />
+    <None Include="Resources\Clicks.png" />
+    <None Include="Resources\Clickspng.png" />
+    <None Include="Resources\Clicks.ico" />
+    <None Include="Resources\MIN LBL.png" />
+    <None Include="Resources\Win.png" />
+    <None Include="Resources\Replay.png" />
     <None Include="Resources\On.png" />
     <None Include="Resources\Off.png" />
     <None Include="Resources\pause button.png" />
