@@ -17,9 +17,10 @@ namespace Puzzle15
     {
         List<Point> initialLocations = new List<Point>();
         List<Button> tiles = new List<Button>();                       
-        Button colorShuffleOff = new Button();
-        Button colorShuffleOn = new Button();
-        Button resetButton = new Button();        
+        PictureBox colorShuffleOnOff = new PictureBox();
+        PictureBox colorShuffleOn = new PictureBox();
+        Button resetButton = new Button();
+        PictureBox startpauseButton = new PictureBox();
         Random rand = new Random();
         Label lbl1 = new Label();
         Label lbl2 = new Label();
@@ -41,17 +42,12 @@ namespace Puzzle15
             ClockStuff();
             ClickStuff();
             WinStuff();
-            Colorstuff();
+            StartPauseButtonAdder();
+            ColorSwitchOnOff();
             ClockTimer.Start();
         }
 
         //Organizatione Boxes
-
-        private void Colorstuff()
-        {
-            ColorSwitchOff();
-            ColorSwitchOn();
-        }
 
         private void WinStuff()
         {
@@ -426,54 +422,121 @@ namespace Puzzle15
             lbl3.Text = "00:00:00:0";
             lbl1.Text = "0";
             clickCounter = 0;
+
+            colorShuffleOnOff.Tag = "on";
+            colorShuffleOnOff.BackColor = Color.Transparent;
+            colorShuffleOnOff.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            string pictureNameOO = "On";
+            colorShuffleOnOff.Image = (Image)Resources.ResourceManager.GetObject(pictureNameOO);
+            IsActive = true;
+
+            startpauseButton.Tag = "pause";
+            startpauseButton.BackColor = Color.Transparent;
+            startpauseButton.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            string pictureNamePS = "Pause";
+            startpauseButton.Image = (Image)Resources.ResourceManager.GetObject(pictureNamePS);
+
             StartText();
             ShuffleTiles();
             ClockTimer.Start();
         }
 
-        //Color switch on/off
+        //Pause Button
 
-        private void ColorSwitchOff()
+        private void StartPauseButtonAdder()
         {
-            colorShuffleOff.Text = "Off";
-            colorShuffleOff.BackColor = Color.White;
-            colorShuffleOff.ForeColor = Color.Black;
-            colorShuffleOff.FlatStyle = FlatStyle.System;
-            colorShuffleOff.Font = new Font("Consolas", 15);
-            colorShuffleOff.Width = 40;
-            colorShuffleOff.Height = 30;
-            colorShuffleOff.Location = new Point(420, 115);
-            this.Controls.Add(colorShuffleOff);
+            startpauseButton.Tag = "pause";
+            startpauseButton.Width = 40;
+            startpauseButton.Height = 30;
+            startpauseButton.Location = new Point(20, 115);
+            this.Controls.Add(startpauseButton);
+            startpauseButton.BackColor = Color.Transparent;
+            startpauseButton.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            colorShuffleOff.Click += ColorShuffleOff_Click;
+            string pictureName = "Pause";
+            startpauseButton.Image = (Image)Resources.ResourceManager.GetObject(pictureName);
+
+            startpauseButton.Click += StartPauseButton_Click;
         }
 
-        private void ColorSwitchOn()
+        private void StartPauseButton_Click(object sender, EventArgs e)
         {
-            colorShuffleOn.Text = "On";
-            colorShuffleOn.BackColor = Color.White;
-            colorShuffleOn.ForeColor = Color.Black;
-            colorShuffleOn.FlatStyle = FlatStyle.System;
-            colorShuffleOn.Font = new Font("Consolas", 15);
-            colorShuffleOn.Width = 40;
-            colorShuffleOn.Height = 30;
-            colorShuffleOn.Location = new Point(20, 115);
-            this.Controls.Add(colorShuffleOn);
+            if (startpauseButton.Tag == "pause")
+            {
+                this.Height = 620;
+                resetButton.Visible = true;
+                startpauseButton.Tag = "start";
+                ClockTimer.Stop();
 
-            colorShuffleOn.Click += ColorShuffleOn_Click;
+                startpauseButton.BackColor = Color.Transparent;
+                startpauseButton.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                string pictureName = "Start";
+                startpauseButton.Image = (Image)Resources.ResourceManager.GetObject(pictureName);
+            }
+            else if (startpauseButton.Tag == "start")
+            {
+                this.Height = 525;
+                resetButton.Visible = false;
+                startpauseButton.Tag = "pause";
+                ClockTimer.Start();
+
+                startpauseButton.BackColor = Color.Transparent;
+                startpauseButton.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                string pictureName = "Pause";
+                startpauseButton.Image = (Image)Resources.ResourceManager.GetObject(pictureName);
+            }
+        }
+
+        //Color switch on/off
+
+        private void ColorSwitchOnOff()
+        {
+            colorShuffleOnOff.Tag = "on";
+            colorShuffleOnOff.Width = 60;
+            colorShuffleOnOff.Height = 30;
+            colorShuffleOnOff.Location = new Point(420, 115);
+            this.Controls.Add(colorShuffleOnOff);
+
+            colorShuffleOnOff.BackColor = Color.Transparent;
+            colorShuffleOnOff.SizeMode = PictureBoxSizeMode.StretchImage;
+
+            string pictureName = "On";
+            colorShuffleOnOff.Image = (Image)Resources.ResourceManager.GetObject(pictureName);
+
+            colorShuffleOnOff.Click += ColorShuffleOff_Click;
         }
 
         private void ColorShuffleOff_Click(object sender, EventArgs e)
         {
-            PlayHand();
-            this.BackColor = Color.GhostWhite;
-            IsActive = false;
-        }
+            if (colorShuffleOnOff.Tag == "on")
+            {
+                PlayHand();
+                this.BackColor = Color.GhostWhite;
+                IsActive = false;
+                colorShuffleOnOff.Tag = "off";
 
-        private void ColorShuffleOn_Click(object sender, EventArgs e)
-        {
-            PlayHand();
-            IsActive = true;
+                colorShuffleOnOff.BackColor = Color.Transparent;
+                colorShuffleOnOff.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                string pictureName = "Off";
+                colorShuffleOnOff.Image = (Image)Resources.ResourceManager.GetObject(pictureName);
+            }
+            else if (colorShuffleOnOff.Tag == "off")
+            {
+                PlayHand();
+                IsActive = true;
+                colorShuffleOnOff.Tag = "on";
+
+                colorShuffleOnOff.BackColor = Color.Transparent;
+                colorShuffleOnOff.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                string pictureName = "On";
+                colorShuffleOnOff.Image = (Image)Resources.ResourceManager.GetObject(pictureName);
+            }           
         }
 
         private void ChangeBackColorForGame()
