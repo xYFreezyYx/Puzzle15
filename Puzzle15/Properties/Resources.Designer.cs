@@ -63,26 +63,6 @@ namespace Puzzle15.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap Clicks {
-            get {
-                object obj = ResourceManager.GetObject("Clicks", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Ghost {
-            get {
-                object obj = ResourceManager.GetObject("Ghost", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap Off {
             get {
                 object obj = ResourceManager.GetObject("Off", resourceCulture);
@@ -136,16 +116,6 @@ namespace Puzzle15.Properties {
         internal static System.Drawing.Bitmap Time {
             get {
                 object obj = ResourceManager.GetObject("Time", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap Win {
-            get {
-                object obj = ResourceManager.GetObject("Win", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

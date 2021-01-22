@@ -82,7 +82,7 @@ namespace Puzzle15
 
             this.BackColor = Color.GhostWhite;
             this.Width = 500;
-            this.Height = 560;
+            this.Height = 540;
 
             for (int j = 0; j < 4; j++)
             {
@@ -95,7 +95,7 @@ namespace Puzzle15
                     tile.Font = new Font("Consolas", 20);
                     tile.Width = 80;
                     tile.Height = 80;
-                    tile.Top = 155 + j * 90;
+                    tile.Top = 130 + j * 90;
                     tile.Left = 65 + i * 90;
                     tile.Text = tileCounter.ToString();
 
@@ -242,19 +242,20 @@ namespace Puzzle15
 
         private void ClickCounterLable()
         {
-            PictureBox lblC = null;
+            Label lblC = null;
 
-            lblC = new PictureBox();
+            lblC = new Label();
+            lblC.Text = "Click";
+            lblC.BackColor = Color.White;
+            lblC.ForeColor = Color.Black;
+            lblC.BorderStyle = BorderStyle.FixedSingle;
+            lblC.TextAlign = ContentAlignment.TopCenter;
+            lblC.FlatStyle = FlatStyle.System;
+            lblC.Font = new Font("Consolas", 20);
             lblC.Width = 80;
-            lblC.Height = 80;
+            lblC.Height = 40;
             lblC.Location = new Point(20, 20);
             this.Controls.Add(lblC);
-
-            lblC.BackColor = Color.Transparent;
-            lblC.SizeMode = PictureBoxSizeMode.StretchImage;
-
-            string pictureName = "Clicks";
-            lblC.Image = (Image)Resources.ResourceManager.GetObject(pictureName);
         }
 
         private void TimerLable()
@@ -263,8 +264,8 @@ namespace Puzzle15
 
             lblT = new PictureBox();
             lblT.Width = 260;
-            lblT.Height = 40;
-            lblT.Location = new Point(110, 40);
+            lblT.Height = 30;
+            lblT.Location = new Point(110, 25);
             this.Controls.Add(lblT);
 
             lblT.BackColor = Color.Transparent;
@@ -276,19 +277,20 @@ namespace Puzzle15
 
         private void WinCounterLable()
         {
-            PictureBox lblW = null;
+            Label lblW = null;
 
-            lblW = new PictureBox();
+            lblW = new Label();
+            lblW.Text = "Wins";
+            lblW.BackColor = Color.White;
+            lblW.ForeColor = Color.Black;
+            lblW.BorderStyle = BorderStyle.FixedSingle;
+            lblW.TextAlign = ContentAlignment.TopCenter;
+            lblW.FlatStyle = FlatStyle.System;
+            lblW.Font = new Font("Consolas", 25);
             lblW.Width = 80;
-            lblW.Height = 80;
+            lblW.Height = 40;
             lblW.Location = new Point(380, 20);
             this.Controls.Add(lblW);
-
-            lblW.BackColor = Color.Transparent;
-            lblW.SizeMode = PictureBoxSizeMode.StretchImage;
-
-            string pictureName = "Win";
-            lblW.Image = (Image)Resources.ResourceManager.GetObject(pictureName);
         }
 
         //Click counter
@@ -296,7 +298,7 @@ namespace Puzzle15
         private void ClickDisplayAdder()
         {
             lbl1.Text = "0";
-            lbl1.BackColor = Color.GhostWhite;
+            lbl1.BackColor = Color.White;
             lbl1.ForeColor = Color.Black;
             lbl1.BorderStyle = BorderStyle.FixedSingle;
             lbl1.TextAlign = ContentAlignment.TopCenter;
@@ -304,7 +306,7 @@ namespace Puzzle15
             lbl1.Font = new Font("Consolas", 30);
             lbl1.Width = 80;
             lbl1.Height = 50;
-            lbl1.Location = new Point(20, 100);
+            lbl1.Location = new Point(20, 70);
             this.Controls.Add(lbl1);            
         }
 
@@ -327,7 +329,7 @@ namespace Puzzle15
             lbl2.Font = new Font("Consolas", 30);
             lbl2.Width = 80;
             lbl2.Height = 50;
-            lbl2.Location = new Point(380, 100);
+            lbl2.Location = new Point(380, 70);
             this.Controls.Add(lbl2);
         }
 
@@ -350,7 +352,7 @@ namespace Puzzle15
             lbl3.Font = new Font("Consolas", 30);
             lbl3.Width = 260;
             lbl3.Height = 50;
-            lbl3.Location = new Point(110, 100);
+            lbl3.Location = new Point(110, 70);
             this.Controls.Add(lbl3);
         }
 
@@ -393,9 +395,9 @@ namespace Puzzle15
 
         private void ResetButtonAdder()
         {
-            resetButton.Width = 80;
+            resetButton.Width = 377;
             resetButton.Height = 80;
-            resetButton.Location = new Point(200, 505);
+            resetButton.Location = new Point(50, 495);
             this.Controls.Add(resetButton);
             resetButton.Visible = false;
 
@@ -411,7 +413,7 @@ namespace Puzzle15
         private void ResetButton_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.GhostWhite;
-            this.Height = 560;
+            this.Height = 540;
             resetButton.Visible = false;
             ClockTimer.Stop();
             dsec = 0;
@@ -451,7 +453,7 @@ namespace Puzzle15
             startpauseButton.Tag = "pause";
             startpauseButton.Width = 40;
             startpauseButton.Height = 30;
-            startpauseButton.Location = new Point(20, 155);
+            startpauseButton.Location = new Point(20, 130);
             this.Controls.Add(startpauseButton);
             startpauseButton.BackColor = Color.Transparent;
             startpauseButton.SizeMode = PictureBoxSizeMode.StretchImage;
@@ -480,7 +482,7 @@ namespace Puzzle15
             }
             else if (startpauseButton.Tag == "start")
             {
-                this.Height = 560;
+                this.Height = 540;
                 resetButton.Visible = false;
                 startpauseButton.Tag = "pause";
                 IsActive1 = true;
@@ -501,7 +503,7 @@ namespace Puzzle15
             colorShuffleOnOff.Tag = "on";
             colorShuffleOnOff.Width = 60;
             colorShuffleOnOff.Height = 30;
-            colorShuffleOnOff.Location = new Point(420, 155);
+            colorShuffleOnOff.Location = new Point(420, 130);
             this.Controls.Add(colorShuffleOnOff);
 
             colorShuffleOnOff.BackColor = Color.Transparent;
